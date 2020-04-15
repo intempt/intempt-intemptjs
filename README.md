@@ -12,7 +12,7 @@ You can find the full API documentation on [dev.intempt.com](https://dev.intempt
 
 Contents:
 
-* [1](https://github.com/intempt/intempt.js#initialize-settings) - Installation and Initialization [intall] (https://dev.intempt.com/#customization-for-web) 
+* [1](https://github.com/intempt/intempt.js#initialize-settings) - Installation and Initialization [install] (https://dev.intempt.com/#customization-for-web) install
 * [2](https://github.com/intempt/intempt.js#identify) - How to identify a user [identify](https://dev.intempt.com/#customization-for-web) identify
 * [3](https://github.com/intempt/intempt.js#identify) - How to track products and category browsing [product and category](https://dev.intempt.com/#customization-for-web)
 * [4](https://github.com/intempt/intempt.js#custom-event) - How to record a custom event [custom event](https://dev.intempt.com/#customization-for-web)
