@@ -108,13 +108,44 @@ You also can create events for visitors actions, that cause changes to categorie
 
 
 
-### Track custom events
+### Recording Custom Events
 
-Custom events are actions taken by your customers. Those events are best suited for tracking high-value interactions with your app. Logging a custom event can trigger any number of subsequent operations (e.g.: email distribution). It is enabled by default. There is no need for changing project configuration.
 
-`Voucherify.track(eventName, metadata, customer, function callback (response) { })`
+Our client-side API allows creation of any event type you might desire to be tracked for your page or application.
 
-- `eventName` - required, an identifier of event
-- `metadata` - required, an object containing data describing an event
-- `customer` - optional, customer details, by default Voucherify takes profile declared with method Voucherify.setIdentity()
+Custom collections was designed to allow you bring custom data into some Intempt-built event collections (like Visitor, Visit, Identify) and bring in your own collections.
 
+After you select this event type, next to it you can see a dropdown list with all the collections, that have not been covered by our other event types. After a collection has been selected, by clicking Filter button you can add filters for and of the properties that you (or we for Intempt-defined collections) might have tracked for this collection.
+
+Intempt automatically tracks a number of on page events. You can log a custom event by calling track, passing in a set of key-value pairs.
+```javascript
+window.intempt["TRACKER_NAME"].track("COLLECTION_NAME", {
+    "your.property": "your value"
+})
+```
+The COLLECTION_NAME refers to an event type. For example, if you wanted to log every purchase made on your site, you might call that collection "purchase". Then, when a purchase happens, you call track and pass in the purchase details.
+```javascript
+window.intempt["YOUR_TRACKER_NAME"].track("purchase", {
+     "items": [{"item name": "item 1","price": 20}, {"item name": "item 2","price": 15}]
+     "totalprice": 35,
+     "ispaid": true,
+     "timestamp": new Date().getTime(),
+     "fixed.name": "John Smith",
+     "fixed.age": 28,
+     "intempt.visit.trackcharge": 35
+})
+```
+### Tracking Revenue with trackcharge
+
+Notice the key intempt.visit.trackcharge in the sample code above. If you use this key in the event details, the value will be recorded as revenue in the Intempt app. This allows you to assess the revenue impact of campaigns.
+
+Collections do not need to be predefined in the Intempt app. As soon as the tracker logs an event with a new collection name, that collection of events will be available in the app.
+
+Events, Collections, and Properties
+An event is a discrete interaction that occurs on your site. Events are organized by type into collections. Events have properties, key-value pairs that record relevant information about the event.
+
+For example, a user clicks on a link. The click is an event. It belongs to the interactions collection. (The interaction type is “click”.)
+
+The properties of the event include the time of the click, the id and other HTML attributes of the element that was clicked, the URL of the page on which the click happened, and so forth.
+
+The tracker code, once installed on a website, will automatically record many events that occur on the site.
