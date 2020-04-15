@@ -13,12 +13,15 @@ You can find the full API documentation on [dev.intempt.com](https://dev.intempt
 Contents:
 
 * [1](https://github.com/intempt/intempt.js#initialize-settings) - Installation and Initialization
-* [2](https://github.com/intempt/intempt.js#identify) - How to identify a user [identify](https://dev.intempt.com/reference/#identify)
-* [3](https://github.com/intempt/intempt.js#identify) - How to track products and category browsing [product and category](https://dev.intempt.com/reference/#identify)
-* [4](https://github.com/intempt/intempt.js#custom-event) - How to record a custom event [custom event](https://dev.intempt.com/reference/#custom-event)
-* [5](https://github.com/intempt/intempt.js#track-charge) - How to track revenue [track charge](https://dev.intempt.com/reference#track-charge) track charge
-* [6](https://github.com/intempt/intempt.js#track-charge) - Event primer [event](https://dev.intempt.com/reference#track-charge) track charge
-* [7](https://github.com/intempt/intempt.js#track-charge) - Properties primer [properties](https://dev.intempt.com/#properties) track charge
+* [2](https://github.com/intempt/intempt.js#identify) - How to identify a user [identify](https://dev.intempt.com/#customization-for-web)
+* [3](https://github.com/intempt/intempt.js#identify) - How to track products and category browsing [product and category](https://dev.intempt.com/#customization-for-web)
+* [4](https://github.com/intempt/intempt.js#custom-event) - How to record a custom event [custom event](https://dev.intempt.com/#customization-for-web)
+* [5](https://github.com/intempt/intempt.js#track-charge) - How to track revenue [track charge](https://dev.intempt.com/#customization-for-web) track charge
+* [6](https://github.com/intempt/intempt.js#track-charge) - Events, Collections & Properties [event collection properties](https://dev.intempt.com/#events-collections-and-properties) events, collections and properties
+* [7](https://github.com/intempt/intempt.js#track-charge) - Event primer [event]
+(https://dev.intempt.com/#customization-for-web) event primer
+* [8](https://github.com/intempt/intempt.js#track-charge) - Properties primer [property]
+(https://dev.intempt.com/#properties) properties primer
 
 ### Usage
 
@@ -150,6 +153,19 @@ For example, a user clicks on a link. The click is an event. It belongs to the i
 The properties of the event include the time of the click, the id and other HTML attributes of the element that was clicked, the URL of the page on which the click happened, and so forth.
 
 The tracker code, once installed on a website, will automatically record many events that occur on the site.
+
+### Events, Collections, and Properties
+An event is a discrete interaction that occurs on your site. Events are organized by type into collections. Events have properties, key-value pairs that record relevant information about the event.
+
+For example, a user clicks on a link:
+
+1. The click is an event.
+
+2. It belongs to the interactions collection. (The interaction type is “click”.)
+
+3. The properties of the event include the time of the click, the id and other HTML attributes of the element that was clicked, the URL of the page on which the click happened, and so forth.
+
+4. The tracker code, once installed on a website, will automatically record many events that occur on the site.
 
 ### Tracker Events
 Events as recorded by the tracker code are conceptually somewhat different than events as defined in the Intempt app.
