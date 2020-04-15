@@ -22,7 +22,7 @@ Contents:
 
 ### Install script
 
-Add the following code to your site, preferably in the '<head>'.
+Add the following code to your site, preferably in the `<head>`.
 
 You can get an automatically generated version of this code, with your account-specific variables filled in, from the sources setup page in the Intempt app.
 
