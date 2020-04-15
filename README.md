@@ -158,7 +158,7 @@ On the JS side, events will soon be renamed to actions.
 Event collections are organized in a tree structure.
 
 visit
----visitor
+*visitor
 ---page
 -----interaction
 -----page_element_exists
