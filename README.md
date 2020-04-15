@@ -12,14 +12,14 @@ You can find the full API documentation on [dev.intempt.com](https://dev.intempt
 
 Contents:
 
-* [1](https://github.com/intempt/intempt.js#initialize-settings) - Installation and Initialization [install] (https://dev.intempt.com/#customization-for-web) install
-* [2](https://github.com/intempt/intempt.js#identify) - How to identify a user [identify](https://dev.intempt.com/#customization-for-web) identify
+* [1](https://github.com/intempt/intempt.js#initialize-settings) - Installation and Initialization [install](https://dev.intempt.com/#customization-for-web)
+* [2](https://github.com/intempt/intempt.js#identify) - How to identify a user [identify](https://dev.intempt.com/#customization-for-web)
 * [3](https://github.com/intempt/intempt.js#identify) - How to track products and category browsing [product and category](https://dev.intempt.com/#customization-for-web)
 * [4](https://github.com/intempt/intempt.js#custom-event) - How to record a custom event [custom event](https://dev.intempt.com/#customization-for-web)
-* [5](https://github.com/intempt/intempt.js#track-charge) - How to track revenue [track charge](https://dev.intempt.com/#customization-for-web) track charge
-* [6](https://github.com/intempt/intempt.js#track-charge) - Events, Collections & Properties [event collection properties](https://dev.intempt.com/#events-collections-and-properties) events, collections and properties
-* [7](https://github.com/intempt/intempt.js#track-charge) - Event primer [event](https://dev.intempt.com/#customization-for-web) event primer
-* [8](https://github.com/intempt/intempt.js#track-charge) - Properties primer [property](https://dev.intempt.com/#properties) properties primer
+* [5](https://github.com/intempt/intempt.js#track-charge) - How to track revenue [track charge](https://dev.intempt.com/#customization-for-web)
+* [6](https://github.com/intempt/intempt.js#track-charge) - Events, Collections & Properties [event collection properties](https://dev.intempt.com/#events-collections-and-properties)
+* [7](https://github.com/intempt/intempt.js#track-charge) - Event primer [event](https://dev.intempt.com/#customization-for-web)
+* [8](https://github.com/intempt/intempt.js#track-charge) - Properties primer [property](https://dev.intempt.com/#properties)
 
 ### Usage
 
