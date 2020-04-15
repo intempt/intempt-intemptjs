@@ -20,11 +20,13 @@ Contents:
 
 ### Usage
 
-### Install script
+### Install and Initialize script
 
 Add the following code to your site, preferably in the `<head>`.
 
 You can get an automatically generated version of this code, with your account-specific variables filled in, from the sources setup page in the Intempt app.
+
+[Log-in](https://app.intempt.com) to Intempt App and obtain your Client-side Keys from [Sources](https://app.intempt.com/sources):
 
 ```javascript
 window.addEventListener("intempt.YOUR_TRACKER_NAME.ready", function() {
@@ -48,52 +50,59 @@ if (window.intempt && window.intempt['YOUR_TRACKER_NAME']) {
 ```
 The tracker object does not exist until initialization completes. Therefore you should check its existence before running any custom tracking code.
 
-You can also link it from [jsdelivr CDN](https://www.jsdelivr.com/projects/intempt.js):
 
-```html
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/rspective/intempt.js@latest/dist/intempt.min.js"></script>
-```
-
-
-### Initialize settings
-
-[Log-in](https://app.voucherify.io/#/login) to Voucherify web interace and obtain your Client-side Keys from [Configuration](https://app.voucherify.io/#/app/configuration):
-
-![](https://www.filepicker.io/api/file/uOLcUZuSwaJFgIOvBpJA)
-
-Invoke `Voucherify.initialize(...)` when your application starts up:
+### Identifying visitors
 
 ```javascript
-$(function () {
-    Voucherify.initialize(
-        "YOUR-CLIENT-APPLICATION-ID-FROM-SETTINGS",
-        "YOUR-CLIENT-TOKEN-FROM-SETTINGS"
-    );
-});
+window.intempt["TRACKER_NAME"].identify({
+    identifier: 'CUSTOM_IDENTIFIER'
+})
 ```
+Our tracking code automatically sets a unique ID for each visitor, and links multiple visits to the same visitor by setting a cookie in the browser.
 
-As a third argument you can specify a timeout setting (in *milliseconds*):
+To track visitors across multiple browsers and apps (or sessions after cookies are removed), pass in a unique identifying code (user email, unique user ID in your database etc.).
+
+You can pass additional key-value pairs to identify, but identifier is the one that defines a unique identity. Other key-value pairs passed in can be used for data queries and segmenting in the Intempt app.
 
 ```javascript
-$(function () {
-    Voucherify.initialize(
-        "YOUR-CLIENT-APPLICATION-ID-FROM-SETTINGS",
-        "YOUR-CLIENT-TOKEN-FROM-SETTINGS",
-        2000
-    );
-});
+window.intempt["TRACKER_NAME"].identify({
+    identifier: 'CUSTOM_IDENTIFIER'
+})
 ```
+### Tracking Categories and Products
 
-We are tracking users which are validating vouchers with those who consume them by a `tracking_id`. For that we are setting up an identity for the user.
-We will generate a `tracking_id` on the server side unless you specify it on your own. In both cases you will receive it in the validation response.
 
-To provide your custom value use this simple function:
+Visitor activity on the page can be scoped by product categories and individual products. This might come in handy when, for instance, you would like to understand differences between visitor activities for different categories or products pages, or when you simply want to know for notification purposes, which is the current one.
+
+All you need to track categories and products is changing the tracked JS variables - our tracker will create the context and persist it automatically. You can either set both, or set one of them:
 
 ```javascript
-$(function () {
-    Voucherify.setIdentity("Your format of tracking_id e.g. Phone number or Email address.");
-});
+window.intempt_category = 'my-category'; // sets the category for current page
+window.intempt_product = 'my-product'; // sets the product for current page
 ```
+To reset category and product, simply purge values from these variables (if your website is multi-page application, that is done automatically upon page transition):
+
+```javascript
+window.intempt_category = undefined; // sets the category for current page
+window.intempt_product = undefined; // sets the product for current page
+```
+You can also use Object to track some additional properties both for categories and for products. In such case the requirement is that this object must contain field name with string in it, like this:
+```javascript
+window.intempt_category = {
+    name: 'my-category', // required field, must contain string
+    property1: 'some value 1',
+    property2: 'some value 2'
+};
+```
+```javascript
+window.intempt_product = {
+    name: 'my-product', // required field, must contain string
+    property1: 'some value 1',
+    property2: 'some value 2'
+};
+``` 
+
+You also can create events for visitors actions, that cause changes to categories and products using Custom action type, and in subsequent menu picking category_changed or product_changed.
 
 
 
