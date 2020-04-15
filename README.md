@@ -33,8 +33,20 @@ window.addEventListener("intempt.YOUR_TRACKER_NAME.ready", function() {
 });
 !function(a,b){if(window.__intempt&&window.intempt)a&&(window.__intempt.init_tracker?window.__intempt.init_tracker(a):window.__intempt.startup_configs.push(a));else{window.__intempt={},window.__intempt.startup_configs=[],a&&window.__intempt.startup_configs.push(a);var c=document.createElement("script");c.type="text/javascript",c.async=!0,c.src=b||"https://cdn.intempt.com/intempt.min.js";var d=document.getElementsByTagName("script")[0];d.parentNode.insertBefore(c,d)}}({orgId:"YOUR_ORG_NAME",trackerId:"YOUR_TRACKER_NAME",token:"YOUR_TRACKER_TOKEN"});
 
-
 ```
+
+Tracker Object
+The tracker object is accessible with:
+```javascript
+window.intempt["TRACKER_NAME"]
+```
+The TRACKER_NAME string is the name as specified in the Intempt app.
+```javascript
+if (window.intempt && window.intempt['YOUR_TRACKER_NAME']) {
+  // Perform your tracker operations here
+}
+```
+The tracker object does not exist until initialization completes. Therefore you should check its existence before running any custom tracking code.
 
 You can also link it from [jsdelivr CDN](https://www.jsdelivr.com/projects/intempt.js):
 
