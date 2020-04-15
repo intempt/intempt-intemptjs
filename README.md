@@ -12,8 +12,7 @@ You can find the full API documentation on [dev.intempt.com](https://dev.intempt
 
 Contents:
 
-* [1](https://github.com/intempt/intempt.js#initialize-settings) - Installation and client-side authentication
-
+* [1](https://github.com/intempt/intempt.js#initialize-settings) - Installation and Initialization
 * [2](https://github.com/intempt/intempt.js#custom-event) - How to send a custom event [custom event](https://dev.intempt.com/reference/#custom-event)
 * [3](https://github.com/intempt/intempt.js#identify) - How to identify a user [identify](https://dev.intempt.com/reference/#identify)
 * [4](https://github.com/intempt/intempt.js#track-charge) - How to send charges [track charge](https://dev.intempt.com/reference#track-charge) track charge
@@ -149,3 +148,40 @@ For example, a user clicks on a link. The click is an event. It belongs to the i
 The properties of the event include the time of the click, the id and other HTML attributes of the element that was clicked, the URL of the page on which the click happened, and so forth.
 
 The tracker code, once installed on a website, will automatically record many events that occur on the site.
+
+### Tracker Events
+Events as recorded by the tracker code are conceptually somewhat different than events as defined in the Intempt app.
+On the JS side, events will soon be renamed to actions.
+
+Event collections are organized in a tree structure.
+
+visit
+visitor
+page
+interaction
+page_element_exists
+page_element_changed
+page_property_changed
+category_changed
+product_changed
+identify
+view
+interaction
+custom
+
+Because of this hierarchy, any event can be filtered or accessed based on the properties associated with something further up the tree.
+
+For example, if you wanted to find all button clicks associated with a particular visit, you can do that.
+
+Custom events logged manually using the JavaScript API appear with whatever collection name was assigned, under the custom collection.
+
+### Event Properties
+Events have properties, key-value pairs the record information about the event.
+
+Properties are grouped into two collections:
+
+fixed — Properties that are (relatively) stable, related to the visit or the visitor. This includes things like operating system, browser, and geolocaiton.
+
+timeseries — Properties that are specific to a particular interaction. This includes element-specific details, time stamps, and anything recorded as part of custom events.
+
+When logging a custom event, you can pass in any existing property key names, as well as define your own.
