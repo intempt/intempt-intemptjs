@@ -13,6 +13,7 @@ You can find the full API documentation on [dev.intempt.com](https://dev.intempt
 Contents:
 
 * [1](https://github.com/intempt/intempt.js#initialize-settings) - Installation and client-side authentication
+
 * [2](https://github.com/intempt/intempt.js#custom-event) - How to send a custom event [custom event](https://dev.intempt.com/reference/#custom-event)
 * [3](https://github.com/intempt/intempt.js#identify) - How to identify a user [identify](https://dev.intempt.com/reference/#identify)
 * [4](https://github.com/intempt/intempt.js#track-charge) - How to send charges [track charge](https://dev.intempt.com/reference#track-charge) track charge
@@ -21,10 +22,18 @@ Contents:
 
 ### Install script
 
-Attach `voucherify.min.js` to your page, somewhere near `</body>`:
+Add the following code to your site, preferably in the '<head>'.
 
-```html
-<script type="text/javascript" src="/libs/voucherify/voucherify.min.js"></script>
+You can get an automatically generated version of this code, with your account-specific variables filled in, from the sources setup page in the Intempt app.
+
+```javascript
+window.addEventListener("intempt.YOUR_TRACKER_NAME.ready", function() {
+  //do something when tracker has been loaded;
+  //the tracker object becomes accessible at window.intempt["site"] after loading;
+});
+!function(a,b){if(window.__intempt&&window.intempt)a&&(window.__intempt.init_tracker?window.__intempt.init_tracker(a):window.__intempt.startup_configs.push(a));else{window.__intempt={},window.__intempt.startup_configs=[],a&&window.__intempt.startup_configs.push(a);var c=document.createElement("script");c.type="text/javascript",c.async=!0,c.src=b||"https://cdn.intempt.co/intempt.min.js";var d=document.getElementsByTagName("script")[0];d.parentNode.insertBefore(c,d)}}({orgId:"YOUR_ORG_NAME",trackerId:"YOUR_TRACKER_NAME",token:"YOUR_TRACKER_TOKEN"});
+
+
 ```
 
 You can also link it from [jsdelivr CDN](https://www.jsdelivr.com/projects/intempt.js):
