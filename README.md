@@ -13,9 +13,12 @@ You can find the full API documentation on [dev.intempt.com](https://dev.intempt
 Contents:
 
 * [1](https://github.com/intempt/intempt.js#initialize-settings) - Installation and Initialization
-* [2](https://github.com/intempt/intempt.js#custom-event) - How to send a custom event [custom event](https://dev.intempt.com/reference/#custom-event)
-* [3](https://github.com/intempt/intempt.js#identify) - How to identify a user [identify](https://dev.intempt.com/reference/#identify)
-* [4](https://github.com/intempt/intempt.js#track-charge) - How to send charges [track charge](https://dev.intempt.com/reference#track-charge) track charge
+* [2](https://github.com/intempt/intempt.js#identify) - How to identify a user [identify](https://dev.intempt.com/reference/#identify)
+* [3](https://github.com/intempt/intempt.js#identify) - How to track products and category browsing [product and category](https://dev.intempt.com/reference/#identify)
+* [4](https://github.com/intempt/intempt.js#custom-event) - How to record a custom event [custom event](https://dev.intempt.com/reference/#custom-event)
+* [5](https://github.com/intempt/intempt.js#track-charge) - How to track revenue [track charge](https://dev.intempt.com/reference#track-charge) track charge
+* [6](https://github.com/intempt/intempt.js#track-charge) - Event primer [event](https://dev.intempt.com/reference#track-charge) track charge
+* [7](https://github.com/intempt/intempt.js#track-charge) - Properties primer [properties](https://dev.intempt.com/#properties) track charge
 
 ### Usage
 
@@ -105,8 +108,6 @@ You also can create events for visitors actions, that cause changes to categorie
 
 
 
-
-
 ### Recording Custom Events
 
 
@@ -134,6 +135,7 @@ window.intempt["YOUR_TRACKER_NAME"].track("purchase", {
      "intempt.visit.trackcharge": 35
 })
 ```
+
 ### Tracking Revenue with trackcharge
 
 Notice the key intempt.visit.trackcharge in the sample code above. If you use this key in the event details, the value will be recorded as revenue in the Intempt app. This allows you to assess the revenue impact of campaigns.
