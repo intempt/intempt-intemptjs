@@ -158,18 +158,18 @@ On the JS side, events will soon be renamed to actions.
 Event collections are organized in a tree structure.
 
 visit
-visitor
-page
-interaction
-page_element_exists
-page_element_changed
-page_property_changed
-category_changed
-product_changed
-identify
-view
-interaction
-custom
+---visitor
+---page
+-----interaction
+-----page_element_exists
+-----page_element_changed
+-----page_property_changed
+-----category_changed
+-----product_changed
+---identify
+---view
+-----interaction
+---custom
 
 Because of this hierarchy, any event can be filtered or accessed based on the properties associated with something further up the tree.
 
