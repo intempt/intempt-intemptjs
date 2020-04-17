@@ -21,8 +21,6 @@ Contents:
 * [7](https://github.com/intempt/intempt-intemptjs#tracker-events) - Event primer [event](https://dev.intempt.com/#customization-for-web)
 * [8](https://github.com/intempt/intempt-intemptjs#event-properties) - Properties primer [property](https://dev.intempt.com/#properties)
 
-### Usage
-
 ### Install and Initialize script
 
 Add the following code to your site, preferably in the `<head>`.
