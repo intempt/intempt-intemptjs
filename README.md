@@ -78,25 +78,25 @@ Visitor activity on the page can be scoped by product categories and individual 
 All you need to track categories and products is changing the tracked JS variables - our tracker will create the context and persist it automatically. You can either set both, or set one of them:
 
 ```javascript
-window.clients_category = 'my-category'; // sets the category for current page
-window.clients_product = 'my-product'; // sets the product for current page
+window.intempt_category = 'my-category'; // sets the category for current page
+window.intempt_product = 'my-product'; // sets the product for current page
 ```
 To reset category and product, simply purge values from these variables (if your website is multi-page application, that is done automatically upon page transition):
 
 ```javascript
-window.clients_category = undefined; // sets the category for current page
-window.clients_product = undefined; // sets the product for current page
+window.intempt_category = undefined; // sets the category for current page
+window.intempt_product = undefined; // sets the product for current page
 ```
 You can also use Object to track some additional properties both for categories and for products. In such case the requirement is that this object must contain field name with string in it, like this:
 ```javascript
-window.clients_category = {
+window.intempt_category = {
     name: 'my-category', // required field, must contain string
     property1: 'some value 1',
     property2: 'some value 2'
 };
 ```
 ```javascript
-window.clients_product = {
+window.intempt_product = {
     name: 'my-product', // required field, must contain string
     property1: 'some value 1',
     property2: 'some value 2'
