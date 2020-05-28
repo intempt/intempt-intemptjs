@@ -30,22 +30,22 @@ You can get an automatically generated version of this code, with your account-s
 [Log-in](https://app.intempt.com) to Intempt App and obtain your Client-side Keys from [Sources](https://app.intempt.com/sources):
 
 ```javascript
-window.addEventListener("intempt.YOUR_TRACKER_NAME.ready", function() {
+window.addEventListener("intempt.YOUR_TRACKER_ID.ready", function() {
   //do something when tracker has been loaded;
   //the tracker object becomes accessible at window._Intempt.clients["site"] after loading;
 });
-!function(a,b){if(window.__intempt&&window._Intempt.clients)a&&(window.__intempt.init_tracker?window.__intempt.init_tracker(a):window.__intempt.startup_configs.push(a));else{window.__intempt={},window.__intempt.startup_configs=[],a&&window.__intempt.startup_configs.push(a);var c=document.createElement("script");c.type="text/javascript",c.async=!0,c.src=b||"https://cdn.intempt.com/intempt.min.js";var d=document.getElementsByTagName("script")[0];d.parentNode.insertBefore(c,d)}}({orgId:"YOUR_ORG_NAME",trackerId:"YOUR_TRACKER_NAME",token:"YOUR_TRACKER_TOKEN"});
+!function(a,b){if(window.__intempt&&window._Intempt.clients)a&&(window.__intempt.init_tracker?window.__intempt.init_tracker(a):window.__intempt.startup_configs.push(a));else{window.__intempt={},window.__intempt.startup_configs=[],a&&window.__intempt.startup_configs.push(a);var c=document.createElement("script");c.type="text/javascript",c.async=!0,c.src=b||"https://cdn.intempt.com/intempt.min.js";var d=document.getElementsByTagName("script")[0];d.parentNode.insertBefore(c,d)}}({orgId:"YOUR_ORG_NAME",trackerId:"YOUR_TRACKER_ID",token:"YOUR_TRACKER_TOKEN"});
 
 ```
 
 Tracker Object
 The tracker object is accessible with:
 ```javascript
-window._Intempt.clients["TRACKER_NAME"]
+window._Intempt.clients["TRACKER_ID"]
 ```
-The TRACKER_NAME string is the name as specified in the Intempt app.
+The TRACKER_ID string is the name as specified in the Intempt app.
 ```javascript
-if (window._Intempt.clients && window._Intempt.clients['YOUR_TRACKER_NAME']) {
+if (window._Intempt.clients && window._Intempt.clients['YOUR_TRACKER_ID']) {
   // Perform your tracker operations here
 }
 ```
@@ -55,7 +55,7 @@ The tracker object does not exist until initialization completes. Therefore you 
 ### Identifying visitors
 
 ```javascript
-window._Intempt.clients["TRACKER_NAME"].identify({
+window._Intempt.clients["TRACKER_ID"].identify({
     identifier: 'CUSTOM_IDENTIFIER'
 })
 ```
@@ -66,7 +66,7 @@ To track visitors across multiple browsers and apps (or sessions after cookies a
 You can pass additional key-value pairs to identify, but identifier is the one that defines a unique identity. Other key-value pairs passed in can be used for data queries and segmenting in the Intempt app.
 
 ```javascript
-window._Intempt.clients["TRACKER_NAME"].identify({
+window._Intempt.clients["TRACKER_ID"].identify({
     identifier: 'CUSTOM_IDENTIFIER'
 })
 ```
@@ -78,25 +78,25 @@ Visitor activity on the page can be scoped by product categories and individual 
 All you need to track categories and products is changing the tracked JS variables - our tracker will create the context and persist it automatically. You can either set both, or set one of them:
 
 ```javascript
-window.clients_category = 'my-category'; // sets the category for current page
-window.clients_product = 'my-product'; // sets the product for current page
+window.intempt_category = 'my-category'; // sets the category for current page
+window.intempt_product = 'my-product'; // sets the product for current page
 ```
 To reset category and product, simply purge values from these variables (if your website is multi-page application, that is done automatically upon page transition):
 
 ```javascript
-window.clients_category = undefined; // sets the category for current page
-window.clients_product = undefined; // sets the product for current page
+window.intempt_category = undefined; // sets the category for current page
+window.intempt_product = undefined; // sets the product for current page
 ```
 You can also use Object to track some additional properties both for categories and for products. In such case the requirement is that this object must contain field name with string in it, like this:
 ```javascript
-window.clients_category = {
+window.intempt_category = {
     name: 'my-category', // required field, must contain string
     property1: 'some value 1',
     property2: 'some value 2'
 };
 ```
 ```javascript
-window.clients_product = {
+window.intempt_product = {
     name: 'my-product', // required field, must contain string
     property1: 'some value 1',
     property2: 'some value 2'
@@ -118,13 +118,13 @@ After you select this event type, next to it you can see a dropdown list with al
 
 Intempt automatically tracks a number of on page events. You can log a custom event by calling track, passing in a set of key-value pairs.
 ```javascript
-window._Intempt.clients["TRACKER_NAME"].track("COLLECTION_NAME", {
+window._Intempt.clients["TRACKER_ID"].track("COLLECTION_NAME", {
     "your.property": "your value"
 })
 ```
 The COLLECTION_NAME refers to an event type. For example, if you wanted to log every purchase made on your site, you might call that collection "purchase". Then, when a purchase happens, you call track and pass in the purchase details.
 ```javascript
-window._Intempt.clients["YOUR_TRACKER_NAME"].track("purchase", {
+window._Intempt.clients["YOUR_TRACKER_ID"].track("purchase", {
      "items": [{"item name": "item 1","price": 20}, {"item name": "item 2","price": 15}]
      "totalprice": 35,
      "ispaid": true,
