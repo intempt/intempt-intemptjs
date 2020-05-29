@@ -1,4 +1,4 @@
-## Intempt - JavaScript SDK
+# Intempt - JavaScript SDK
 
 [Intempt](https://intempt.com/?utm_campaign=sdk&utm_medium=docs&utm_source=github) is an API-first platform for developers and marketers who are dissatisfied with high-maintenance personalizaton software. Our product is a personalization infrastructure through API and easy-to-use Console that provides a quicker way to build personalized applications. Unlike legacy personalization software we have:
 
@@ -10,7 +10,7 @@ This is a library to facilitate tracking of anonymous and logeed in user traffic
 
 You can find the full API documentation on [dev.intempt.com](https://dev.intempt.com).
 
-Contents:
+## Contents:
 
 * [1](https://github.com/intempt/intempt-intemptjs#install-and-initialize-script) - Installation and Initialization [install](https://dev.intempt.com/#customization-for-web)
 * [2](https://github.com/intempt/intempt-intemptjs#identifying-visitors) - How to identify a user [identify](https://dev.intempt.com/#customization-for-web)
@@ -21,7 +21,7 @@ Contents:
 * [7](https://github.com/intempt/intempt-intemptjs#tracker-events) - Event primer [event](https://dev.intempt.com/#customization-for-web)
 * [8](https://github.com/intempt/intempt-intemptjs#event-properties) - Properties primer [property](https://dev.intempt.com/#properties)
 
-### Install and Initialize script
+## Install and Initialize script
 
 Add the following code to your site, preferably in the `<head>`.
 
@@ -30,35 +30,39 @@ You can get an automatically generated version of this code, with your account-s
 [Log-in](https://app.intempt.com) to Intempt App and obtain your Client-side Keys from [Sources](https://app.intempt.com/sources):
 
 ```javascript
-window.addEventListener("intempt.YOUR_TRACKER_ID.ready", function() {
+window.addEventListener("intempt.TRACKER_ID.ready", function() {
   //do something when tracker has been loaded;
   //the tracker object becomes accessible at window._Intempt.clients["site"] after loading;
 });
 !function(a,b){if(window.__intempt&&window._Intempt.clients)a&&(window.__intempt.init_tracker?window.__intempt.init_tracker(a):window.__intempt.startup_configs.push(a));else{window.__intempt={},window.__intempt.startup_configs=[],a&&window.__intempt.startup_configs.push(a);var c=document.createElement("script");c.type="text/javascript",c.async=!0,c.src=b||"https://cdn.intempt.com/intempt.min.js";var d=document.getElementsByTagName("script")[0];d.parentNode.insertBefore(c,d)}}({orgId:"YOUR_ORG_NAME",trackerId:"YOUR_TRACKER_ID",token:"YOUR_TRACKER_TOKEN"});
-
 ```
 
-Tracker Object
+## Tracker Object
+
 The tracker object is accessible with:
+
 ```javascript
 window._Intempt.clients["TRACKER_ID"]
 ```
-The TRACKER_ID string is the name as specified in the Intempt app.
+
+The `TRACKER_ID` string is the ID as specified in the Intempt App.
 ```javascript
-if (window._Intempt.clients && window._Intempt.clients['YOUR_TRACKER_ID']) {
+if (window._Intempt.clients && window._Intempt.clients["TRACKER_ID"]) {
   // Perform your tracker operations here
 }
 ```
+
 The tracker object does not exist until initialization completes. Therefore you should check its existence before running any custom tracking code.
 
-
-### Identifying visitors
+## Identifying visitors
 
 ```javascript
-window._Intempt.clients["TRACKER_ID"].identify({
-    identifier: 'CUSTOM_IDENTIFIER'
-})
+function identify() {
+    var intempt = window._Intempt.clients["TRACKER_ID"];
+    intempt.identify({'identifier' : "CUSTOM_IDENTIFIER"});	
+}
 ```
+
 Our tracking code automatically sets a unique ID for each visitor, and links multiple visits to the same visitor by setting a cookie in the browser.
 
 To track visitors across multiple browsers and apps (or sessions after cookies are removed), pass in a unique identifying code (user email, unique user ID in your database etc.).
@@ -71,7 +75,7 @@ window._Intempt.clients["TRACKER_ID"].identify({
 })
 ```
 
-### Tracking Categories and Products
+## Tracking Categories and Products
 
 Visitor activity on the page can be scoped by product categories and individual products. This might come in handy when, for instance, you would like to understand differences between visitor activities for different categories or products pages, or when you simply want to know for notification purposes, which is the current one.
 
@@ -81,13 +85,16 @@ All you need to track categories and products is changing the tracked JS variabl
 window.intempt_category = 'my-category'; // sets the category for current page
 window.intempt_product = 'my-product'; // sets the product for current page
 ```
+
 To reset category and product, simply purge values from these variables (if your website is multi-page application, that is done automatically upon page transition):
 
 ```javascript
 window.intempt_category = undefined; // sets the category for current page
 window.intempt_product = undefined; // sets the product for current page
 ```
+
 You can also use Object to track some additional properties both for categories and for products. In such case the requirement is that this object must contain field name with string in it, like this:
+
 ```javascript
 window.intempt_category = {
     name: 'my-category', // required field, must contain string
@@ -95,6 +102,7 @@ window.intempt_category = {
     property2: 'some value 2'
 };
 ```
+
 ```javascript
 window.intempt_product = {
     name: 'my-product', // required field, must contain string
@@ -103,12 +111,7 @@ window.intempt_product = {
 };
 ```
 
-You also can create events for visitors actions, that cause changes to categories and products using Custom action type, and in subsequent menu picking category_changed or product_changed.
-
-
-
-### Recording Custom Events
-
+## Recording Custom Events
 
 Our client-side API allows creation of any event type you might desire to be tracked for your page or application.
 
@@ -117,14 +120,18 @@ Custom collections was designed to allow you bring custom data into some Intempt
 After you select this event type, next to it you can see a dropdown list with all the collections, that have not been covered by our other event types. After a collection has been selected, by clicking Filter button you can add filters for and of the properties that you (or we for Intempt-defined collections) might have tracked for this collection.
 
 Intempt automatically tracks a number of on page events. You can log a custom event by calling track, passing in a set of key-value pairs.
+
 ```javascript
-window._Intempt.clients["TRACKER_ID"].track("COLLECTION_NAME", {
-    "your.property": "your value"
-})
+function track() {
+  var intempt = window._Intempt.clients["TRACKER_ID"]
+  intempt.track("COLLECTION_NAME", {"your.property": "your value"})
+}
 ```
+
 The COLLECTION_NAME refers to an event type. For example, if you wanted to log every purchase made on your site, you might call that collection "purchase". Then, when a purchase happens, you call track and pass in the purchase details.
+
 ```javascript
-window._Intempt.clients["YOUR_TRACKER_ID"].track("purchase", {
+window._Intempt.clients["TRACKER_ID"].track("purchase", {
      "items": [{"item name": "item 1","price": 20}, {"item name": "item 2","price": 15}]
      "totalprice": 35,
      "ispaid": true,
@@ -135,7 +142,7 @@ window._Intempt.clients["YOUR_TRACKER_ID"].track("purchase", {
 })
 ```
 
-### Tracking Revenue with trackcharge
+## Tracking Revenue with trackcharge
 
 Notice the key intempt.visit.trackcharge in the sample code above. If you use this key in the event details, the value will be recorded as revenue in the Intempt app. This allows you to assess the revenue impact of campaigns.
 
@@ -150,7 +157,8 @@ The properties of the event include the time of the click, the id and other HTML
 
 The tracker code, once installed on a website, will automatically record many events that occur on the site.
 
-### Events, Collections, and Properties
+## Events, Collections, and Properties
+
 An event is a discrete interaction that occurs on your site. Events are organized by type into collections. Events have properties, key-value pairs that record relevant information about the event.
 
 For example, a user clicks on a link:
@@ -163,25 +171,34 @@ For example, a user clicks on a link:
 
 4. The tracker code, once installed on a website, will automatically record many events that occur on the site.
 
-### Tracker Events
+## Tracker Events
+
 Events as recorded by the tracker code are conceptually somewhat different than events as defined in the Intempt app.
 On the JS side, events will soon be renamed to actions.
 
 Event collections are organized in a tree structure.
 
-visit
-visitor
-page
-interaction
-page_element_exists
-page_element_changed
-page_property_changed
-category_changed
-product_changed
-identify
-view
-interaction
-custom
+visitor (Created for first visit to the website)
+	|__ visitorId (Created on the first visit for the user on the website)
+	|__ eventId
+
+visit (Created for every new session on the website site)
+	|__ visitorId
+	|__ parentId [eventId of visitor schema]
+	|__ eventId
+	
+profile (Created for the first new visit on the website)
+	|__ visitorId
+	
+page (Created for all pages visited on the website)
+	|__ visitorId
+	|__ parentId [eventId of visit schema]
+	|__ eventId
+
+interaction (Created for every interaction site on the website)
+	|__ visitorId
+	|__ parentId [eventId of page schema]
+	|__ eventId
 
 Because of this hierarchy, any event can be filtered or accessed based on the properties associated with something further up the tree.
 
@@ -189,7 +206,8 @@ For example, if you wanted to find all button clicks associated with a particula
 
 Custom events logged manually using the JavaScript API appear with whatever collection name was assigned, under the custom collection.
 
-### Event Properties
+## Event Properties
+
 Events have properties, key-value pairs the record information about the event.
 
 Properties are grouped into two collections:
