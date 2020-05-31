@@ -178,41 +178,27 @@ On the JS side, events will soon be renamed to actions.
 
 Event collections are organized in a tree structure.
 
-- visit
-    - visitor
-    - page
-        - interaction
-        - page_element_exists
-        - page_element_changed
-        - page_property_changed
-        - category_changed
-        - product_changed
-    - identify
-    - view
-        - interaction
-    - custom
-
 - visitor (Created for first visit to the website)
 	- visitorId (Created on the first visit for the user on the website)
 	- eventId
 
-visit (Created for every new session on the website site)
-	|__ visitorId
-	|__ parentId [eventId of visitor schema]
-	|__ eventId
+- visit (Created for every new session on the website site)
+	- visitorId
+	- parentId [eventId of visitor schema]
+	- eventId
 	
-profile (Created for the first new visit on the website)
-	|__ visitorId
+- profile (Created for the first new visit on the website)
+	- visitorId
 	
-page (Created for all pages visited on the website)
-	|__ visitorId
-	|__ parentId [eventId of visit schema]
-	|__ eventId
+- page (Created for all pages visited on the website)
+	- visitorId
+	- parentId [eventId of visit schema]
+	- eventId
 
-interaction (Created for every interaction site on the website)
-	|__ visitorId
-	|__ parentId [eventId of page schema]
-	|__ eventId
+- interaction (Created for every interaction site on the website)
+	- visitorId
+	- parentId [eventId of page schema]
+	- eventId
 
 Because of this hierarchy, any event can be filtered or accessed based on the properties associated with something further up the tree.
 
