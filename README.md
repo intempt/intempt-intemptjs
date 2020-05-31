@@ -192,7 +192,7 @@ Event collections are organized in a tree structure.
         - interaction
     - custom
 
-visitor (Created for first visit to the website)
+- visitor (Created for first visit to the website)
 	- visitorId (Created on the first visit for the user on the website)
 	- eventId
 
