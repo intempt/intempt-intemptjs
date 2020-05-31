@@ -178,9 +178,23 @@ On the JS side, events will soon be renamed to actions.
 
 Event collections are organized in a tree structure.
 
+- visit
+    - visitor
+    - page
+        - interaction
+        - page_element_exists
+        - page_element_changed
+        - page_property_changed
+        - category_changed
+        - product_changed
+    - identify
+    - view
+        - interaction
+    - custom
+
 visitor (Created for first visit to the website)
-	|__ visitorId (Created on the first visit for the user on the website)
-	|__ eventId
+	- visitorId (Created on the first visit for the user on the website)
+	- eventId
 
 visit (Created for every new session on the website site)
 	|__ visitorId
