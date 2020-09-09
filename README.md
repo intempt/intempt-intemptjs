@@ -21,7 +21,7 @@ You can find the full API documentation on [dev.intempt.com](https://dev.intempt
 * [7](https://github.com/intempt/intempt-intemptjs#tracker-events) - Event primer [event](https://dev.intempt.com/#customization-for-web)
 * [8](https://github.com/intempt/intempt-intemptjs#event-properties) - Properties primer [property](https://dev.intempt.com/#properties)
 
-## Install and Initialize script
+## Install and Initialize Script
 
 Add the following code to your site, preferably in the `<head>`.
 
@@ -54,7 +54,7 @@ if (window._Intempt.clients && window._Intempt.clients["TRACKER_ID"]) {
 
 The tracker object does not exist until initialization completes. Therefore you should check its existence before running any custom tracking code.
 
-## Identifying visitors
+## Identifying Visitors
 
 ```javascript
 function identify() {
@@ -73,6 +73,12 @@ You can pass additional key-value pairs to identify, but identifier is the one t
 window._Intempt.clients["TRACKER_ID"].identify({
     identifier: 'CUSTOM_IDENTIFIER'
 })
+```
+
+### Retrieving VisitorId
+
+```javascript
+const visitorId = window._Intempt.clients["TRACKER_ID"].getVisitorId();
 ```
 
 ## Tracking Categories and Products
