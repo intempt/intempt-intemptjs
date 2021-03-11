@@ -12,156 +12,78 @@ You can find the full API documentation on [dev.intempt.com](https://dev.intempt
 
 ## Contents:
 
-* [1](https://github.com/intempt/intempt-intemptjs#install-and-initialize-script) - Installation and Initialization [install](https://dev.intempt.com/#customization-for-web)
-* [2](https://github.com/intempt/intempt-intemptjs#identifying-visitors) - How to identify a user [identify](https://dev.intempt.com/#customization-for-web)
-* [3](https://github.com/intempt/intempt-intemptjs#tracking-categories-and-products) - How to track products and category browsing [product and category](https://dev.intempt.com/#customization-for-web)
-* [4](https://github.com/intempt/intempt-intemptjs#recording-custom-events) - How to record a custom event [custom event](https://dev.intempt.com/#customization-for-web)
-* [5](https://github.com/intempt/intempt-intemptjs#tracking-revenue-with-trackcharge) - How to track revenue [track charge](https://dev.intempt.com/#customization-for-web)
-* [6](https://github.com/intempt/intempt-intemptjs#events-collections-and-properties) - Events, Collections & Properties [event collection properties](https://dev.intempt.com/#events-collections-and-properties)
-* [7](https://github.com/intempt/intempt-intemptjs#tracker-events) - Event primer [event](https://dev.intempt.com/#customization-for-web)
-* [8](https://github.com/intempt/intempt-intemptjs#event-properties) - Properties primer [property](https://dev.intempt.com/#properties)
+* [1](https://github.com/intempt/intempt-intemptjs#install-and-initialize-script) - Installation and Initialization 
+* [2](https://github.com/intempt/intempt-intemptjs#identifying-visitors) - How to identify a user
+* [3](https://github.com/intempt/intempt-intemptjs#tracking-categories-and-products) - How to track products and category browsing
+* [4](https://github.com/intempt/intempt-intemptjs#recording-custom-events) - How to record a custom event
+* [5](https://github.com/intempt/intempt-intemptjs#tracking-revenue-with-trackcharge) - How to track revenue
+* [6](https://github.com/intempt/intempt-intemptjs#events-collections-and-properties) - Events, Collections & Properties
+* [7](https://github.com/intempt/intempt-intemptjs#tracker-events) - Event primer
+* [8](https://github.com/intempt/intempt-intemptjs#event-properties) - Properties primer
 
 ## Install and Initialize Script
 
-Add the following code to your site, preferably in the `<head>`.
+Add the following code to your site, in the `<head>` tag.
 
-You can get an automatically generated version of this code, with your account-specific variables filled in, from the sources setup page in the Intempt app.
+You can get an automatically generated version of this code, with your account specific variables filled in, from the sources page.
 
-[Log-in](https://app.intempt.com) to Intempt App and obtain your Client-side Keys from [Sources](https://app.intempt.com/sources):
-
-```javascript
-window.addEventListener("intempt.TRACKER_ID.ready", function() {
-  //do something when tracker has been loaded;
-  //the tracker object becomes accessible at window._Intempt.clients["site"] after loading;
-});
-!function(a,b){if(window.__intempt&&window._Intempt.clients)a&&(window.__intempt.init_tracker?window.__intempt.init_tracker(a):window.__intempt.startup_configs.push(a));else{window.__intempt={},window.__intempt.startup_configs=[],a&&window.__intempt.startup_configs.push(a);var c=document.createElement("script");c.type="text/javascript",c.async=!0,c.src=b||"https://cdn.intempt.com/intempt.min.js";var d=document.getElementsByTagName("script")[0];d.parentNode.insertBefore(c,d)}}({orgId:"YOUR_ORG_NAME",trackerId:"YOUR_TRACKER_ID",token:"YOUR_TRACKER_TOKEN"});
-```
-
-## Tracker Object
-
-The tracker object is accessible with:
+[Login](https://app.intempt.com) to Intempt and obtain your snippet from the [sources](https://app.intempt.com/sources) page:
 
 ```javascript
-window._Intempt.clients["TRACKER_ID"]
+    <script src="https://cdn.intempt.com/intempt.min.js"></script>
 ```
 
-The `TRACKER_ID` string is the ID as specified in the Intempt App.
+Outside the `<head>` tag - you will need to add your configuration details:
+
 ```javascript
-if (window._Intempt.clients && window._Intempt.clients["TRACKER_ID"]) {
-  // Perform your tracker operations here
-}
+    intempt.configure("playground", "193528997887303680", "J_2HrlwS5tTVMJ3NkG7mT_L8INw4j1B6.8mC5KS-0BV8AtOBLJuewCDgo_NQa80c4x_ayyiHMRg2QLjX6Q8xf6-T0_ZJz5xVL")
 ```
 
-The tracker object does not exist until initialization completes. Therefore you should check its existence before running any custom tracking code.
+The tracker object does not exist until initialization completes. Therefore, you should check its existence before running any custom tracking code.
 
 ## Identifying Visitors
-
-```javascript
-function identify() {
-    var intempt = window._Intempt.clients["TRACKER_ID"];
-    intempt.identify({'identifier' : "CUSTOM_IDENTIFIER"});	
-}
-```
 
 Our tracking code automatically sets a unique ID for each visitor, and links multiple visits to the same visitor by setting a cookie in the browser.
 
 To track visitors across multiple browsers and apps (or sessions after cookies are removed), pass in a unique identifying code (user email, unique user ID in your database etc.).
 
-You can pass additional key-value pairs to identify, but identifier is the one that defines a unique identity. Other key-value pairs passed in can be used for data queries and segmenting in the Intempt app.
-
 ```javascript
-window._Intempt.clients["TRACKER_ID"].identify({
-    identifier: 'CUSTOM_IDENTIFIER'
-})
+	intempt.identifyUser("test@gmail.com")
 ```
 
-### Retrieving VisitorId
+### Retrieving Unique VisitorId
 
 ```javascript
-const visitorId = window._Intempt.clients["TRACKER_ID"].getVisitorId();
-```
-
-## Tracking Categories and Products
-
-Visitor activity on the page can be scoped by product categories and individual products. This might come in handy when, for instance, you would like to understand differences between visitor activities for different categories or products pages, or when you simply want to know for notification purposes, which is the current one.
-
-All you need to track categories and products is changing the tracked JS variables - our tracker will create the context and persist it automatically. You can either set both, or set one of them:
-
-```javascript
-window.intempt_category = 'my-category'; // sets the category for current page
-window.intempt_product = 'my-product'; // sets the product for current page
-```
-
-To reset category and product, simply purge values from these variables (if your website is multi-page application, that is done automatically upon page transition):
-
-```javascript
-window.intempt_category = undefined; // sets the category for current page
-window.intempt_product = undefined; // sets the product for current page
-```
-
-You can also use Object to track some additional properties both for categories and for products. In such case the requirement is that this object must contain field name with string in it, like this:
-
-```javascript
-window.intempt_category = {
-    name: 'my-category', // required field, must contain string
-    property1: 'some value 1',
-    property2: 'some value 2'
-};
-```
-
-```javascript
-window.intempt_product = {
-    name: 'my-product', // required field, must contain string
-    property1: 'some value 1',
-    property2: 'some value 2'
-};
+    intempt.getVisitorId()
 ```
 
 ## Recording Custom Events
 
 Our client-side API allows creation of any event type you might desire to be tracked for your page or application.
 
-Custom collections was designed to allow you bring custom data into some Intempt-built event collections (like Visitor, Visit, Identify) and bring in your own collections.
-
-After you select this event type, next to it you can see a dropdown list with all the collections, that have not been covered by our other event types. After a collection has been selected, by clicking Filter button you can add filters for and of the properties that you (or we for Intempt-defined collections) might have tracked for this collection.
+Custom collections allow you to bring custom data into your organization.
 
 Intempt automatically tracks a number of on page events. You can log a custom event by calling track, passing in a set of key-value pairs.
 
 ```javascript
-function track() {
-  var intempt = window._Intempt.clients["TRACKER_ID"]
-  intempt.track("COLLECTION_NAME", {"your.property": "your value"})
-}
+    intempt.CLIENT.recordEvent('COLLECTION_NAME', {
+		key: value,
+	});
 ```
 
 The COLLECTION_NAME refers to an event type. For example, if you wanted to log every purchase made on your site, you might call that collection "purchase". Then, when a purchase happens, you call track and pass in the purchase details.
 
 ```javascript
-window._Intempt.clients["TRACKER_ID"].track("purchase", {
-     "items": [{"item name": "item 1","price": 20}, {"item name": "item 2","price": 15}]
-     "totalprice": 35,
-     "ispaid": true,
-     "timestamp": new Date().getTime(),
-     "fixed.name": "John Smith",
-     "fixed.age": 28,
-     "intempt.visit.trackcharge": 35
-})
+	intempt.CLIENT.recordEvent("purchase", {
+		 "items": [{"item name": "item 1","price": 20}, {"item name": "item 2","price": 15}]
+		 "totalprice": 35,
+		 "ispaid": true,
+		 "timestamp": new Date().getTime(),
+		 "fixed.name": "John Smith",
+		 "fixed.age": 28,
+		 "intempt.visit.trackcharge": 35
+	})
 ```
-
-## Tracking Revenue with trackcharge
-
-Notice the key intempt.visit.trackcharge in the sample code above. If you use this key in the event details, the value will be recorded as revenue in the Intempt app. This allows you to assess the revenue impact of campaigns.
-
-Collections do not need to be predefined in the Intempt app. As soon as the tracker logs an event with a new collection name, that collection of events will be available in the app.
-
-Events, Collections, and Properties
-An event is a discrete interaction that occurs on your site. Events are organized by type into collections. Events have properties, key-value pairs that record relevant information about the event.
-
-For example, a user clicks on a link. The click is an event. It belongs to the interactions collection. (The interaction type is “click”.)
-
-The properties of the event include the time of the click, the id and other HTML attributes of the element that was clicked, the URL of the page on which the click happened, and so forth.
-
-The tracker code, once installed on a website, will automatically record many events that occur on the site.
 
 ## Events, Collections, and Properties
 
@@ -171,40 +93,30 @@ For example, a user clicks on a link:
 
 1. The click is an event.
 
-2. It belongs to the interactions collection. (The interaction type is “click”.)
+2. It belongs to the click collection.
 
 3. The properties of the event include the time of the click, the id and other HTML attributes of the element that was clicked, the URL of the page on which the click happened, and so forth.
 
-4. The tracker code, once installed on a website, will automatically record many events that occur on the site.
+4. The tracker code, once installed on a website, will automatically record many events that occur on the site and subdomains.
 
 ## Tracker Events
 
-Events as recorded by the tracker code are conceptually somewhat different than events as defined in the Intempt app.
-On the JS side, events will soon be renamed to actions.
+Events as recorded by the tracker code are inserted as data items into the respective collection that it belongs to.
 
-Event collections are organized in a tree structure.
-
-- visitor (Created for first visit to the website)
+- click (Triggered on any interactive click)
 	- visitorId (Created on the first visit for the user on the website)
 	- eventId
 
-- visit (Created for every new session on the website site)
+- pageviews (Triggered on any page view or page change)
 	- visitorId
-	- parentId [eventId of visitor schema]
 	- eventId
 	
-- profile (Created for the first new visit on the website)
+- forum_submissions (Triggered on any forum submission)
 	- visitorId
-	
-- page (Created for all pages visited on the website)
-	- visitorId
-	- parentId [eventId of visit schema]
 	- eventId
 
-- interaction (Created for every interaction site on the website)
+- profile (Triggered on identification of the user)
 	- visitorId
-	- parentId [eventId of page schema]
-	- eventId
 
 Because of this hierarchy, any event can be filtered or accessed based on the properties associated with something further up the tree.
 
@@ -218,7 +130,7 @@ Events have properties, key-value pairs the record information about the event.
 
 Properties are grouped into two collections:
 
-fixed — Properties that are (relatively) stable, related to the visit or the visitor. This includes things like operating system, browser, and geolocaiton.
+fixed — Properties that are (relatively) stable, related to the visit or the visitor. This includes things like operating system, browser, and geolocation.
 
 timeseries — Properties that are specific to a particular interaction. This includes element-specific details, time stamps, and anything recorded as part of custom events.
 
