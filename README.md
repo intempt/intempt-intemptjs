@@ -10,12 +10,12 @@ This is a library to facilitate tracking of anonymous and logged-in user traffic
 
 ## Contents:
 
-* [1](https://github.com/intempt/intempt-intemptjs#installation-and-initialization) - Installation and Initialization 
-* [2](https://github.com/intempt/intempt-intemptjs#identifying-visitors) - How to identify a user
-* [3](https://github.com/intempt/intempt-intemptjs#retrieving-a-users-visitorid) - Retrieving A User's VisitorId
-* [4](https://github.com/intempt/intempt-intemptjs#recording-custom-events) - Recording Custom Events
-* [5](https://github.com/intempt/intempt-intemptjs#events-collections-and-properties) - Events, Collections & Properties
-* [6](https://github.com/intempt/intempt-intemptjs#auto-tracking-events) - Auto-tracking Events
+* [1](#installation-and-initialization) - Installation and Initialization 
+* [2](#identifying-visitors) - How to identify a user
+* [3](#retrieving-a-users-visitorid) - Retrieving A User's VisitorId
+* [4](#recording-custom-events) - Recording Custom Events
+* [5](#events-collections-and-properties) - Events, Collections & Properties
+* [6](#auto-tracking-events) - Auto-tracking Events
 
 ## Installation and Initialization
 
