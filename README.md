@@ -16,6 +16,7 @@ This is a library to facilitate tracking of anonymous and logged-in user traffic
 * [4](https://github.com/intempt/intempt-intemptjs#recording-custom-events) - Recording Custom Events
 * [5](https://github.com/intempt/intempt-intemptjs#events-collections-and-properties) - Events, Collections & Properties
 * [6](https://github.com/intempt/intempt-intemptjs#auto-tracking-events) - Auto-tracking Events
+* [7](https://github.com/intempt/intempt-intemptjs#tracking-consents) - Recording Consents
 
 ## Installation and Initialization
 
@@ -57,10 +58,18 @@ Our client-side API allows creation of any event type you might desire to be tra
 
 Custom collections allow you to bring custom data into your organization.
 
+## Create Custom Collection
+To start tracking custom events for our organization, after creating a [source](https://app.intempt.com/sources) you intend to use on your website, navigate to schema then use the schema Builder to create a collection with your personalized fields. Make sure to add a visitorId field and set a profile identifier as one of its properties. [See intempt docs for keys and identifiers](https://dev.intempt.com/#keys-and-identifiers) to find out why.
+
+Make sure to also add an eventId to your schema. This depends on your use case. Adding an eventId fields tracks each event but without an eventId, existing data is replaced
+
+Set up other custom field properties that match the data you plan to track.
+
 Intempt automatically tracks a number of events. You can log a custom event by calling Intempt's recordEvent function, passing in a set of key-value pairs.
 
+
 ```javascript
-    intempt.CLIENT.recordEvent('COLLECTION_NAME', {
+    intempt.recordEvent('COLLECTION_NAME', {
 		key: value,
 	});
 ```
@@ -70,7 +79,7 @@ The COLLECTION_NAME refers to an event type. For example, if you wanted to log e
 ### Example
 
 ```javascript
-	intempt.CLIENT.recordEvent("purchase", {
+	intempt.recordEvent("purchase", {
 		 "items": [{"item name": "item 1","price": 20}, {"item name": "item 2","price": 15}],
 		 "totalprice": 35,
 		 "ispaid": true,
@@ -80,6 +89,10 @@ The COLLECTION_NAME refers to an event type. For example, if you wanted to log e
 		 "intempt.visit.trackcharge": 35
 	})
 ```
+
+In the example above, we have a custom collection with name of `purchase`, then we have an object of key-value pairs. The Object passed into represent the fields we created while creating the collection. 
+
+`NB`: Data type sent should match data type set when creating the collection. For instance, We are sending a field `timestamp` which has a Data type of `number`, Sending data with a type of `string` instead of `number` will make this custom collection not get tracked
 
 ## Events, Collections, and Properties
 
@@ -112,3 +125,38 @@ These events are:
 - Profile (profile) (Triggered on identification of the user)
 
 Custom events logged manually using the JavaScript API appear with whatever collection name was assigned.
+
+## Tracking Consents
+
+Save user consents and apply them to data flow. Make sure you have created consents purposes in your organization's settings
+
+
+
+### Supported Regulation Types - GDPR & CCPA;
+
+Consents are tracked using Intempt's exported function ;
+
+```javascript
+	intempt.trackConsents(consents)
+```
+
+`Intempt.trackConsents()` expects consents as an array of Objects inorder to be tracked successfully. 
+Example: 
+
+```Javascript
+	intempt.trackConsents([
+		{
+         "regulation": "GDPR",
+         "purpose": "advertising",
+         "consented": true
+        },
+		{
+         "regulation": "CCPA",
+         "purpose": "advertising",
+         "consented": false
+        },
+	])
+
+```
+
+Consents can contain as much as possible depending on your use case.
