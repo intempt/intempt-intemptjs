@@ -16,6 +16,7 @@ This is a library to facilitate tracking of anonymous and logged-in user traffic
 * [4](https://github.com/intempt/intempt-intemptjs#recording-custom-events) - Recording Custom Events
 * [5](https://github.com/intempt/intempt-intemptjs#events-collections-and-properties) - Events, Collections & Properties
 * [6](https://github.com/intempt/intempt-intemptjs#auto-tracking-events) - Auto-tracking Events
+* [7](https://github.com/intempt/intempt-intemptjs#tracking-consents) - Recording Consents
 
 ## Installation and Initialization
 
@@ -60,7 +61,7 @@ Custom collections allow you to bring custom data into your organization.
 Intempt automatically tracks a number of events. You can log a custom event by calling Intempt's recordEvent function, passing in a set of key-value pairs.
 
 ```javascript
-    intempt.CLIENT.recordEvent('COLLECTION_NAME', {
+    intempt.recordEvent('COLLECTION_NAME', {
 		key: value,
 	});
 ```
@@ -70,7 +71,7 @@ The COLLECTION_NAME refers to an event type. For example, if you wanted to log e
 ### Example
 
 ```javascript
-	intempt.CLIENT.recordEvent("purchase", {
+	intempt.recordEvent("purchase", {
 		 "items": [{"item name": "item 1","price": 20}, {"item name": "item 2","price": 15}],
 		 "totalprice": 35,
 		 "ispaid": true,
@@ -112,3 +113,38 @@ These events are:
 - Profile (profile) (Triggered on identification of the user)
 
 Custom events logged manually using the JavaScript API appear with whatever collection name was assigned.
+
+## Tracking Consents
+
+Save user consents and apply them to data flow. Make sure you have created consents purposes in your organization's settings
+
+
+
+### Supported Regulation Types - GDPR & CCPA;
+
+Consents are tracked using Intempt's exported function ;
+
+```javascript
+	intempt.trackConsents(consents)
+```
+
+`Intempt.trackConsents()` expects consents as an array of Objects inorder to be tracked successfully. 
+Example: 
+
+```Javascript
+	intempt.trackConsents([
+		{
+         "regulation": "GDPR",
+         "purpose": "advertising",
+         "consented": true
+        },
+		{
+         "regulation": "CCPA",
+         "purpose": "advertising",
+         "consented": false
+        },
+	])
+
+```
+
+Consents can contain as much as possible depending on your use case.
