@@ -17,6 +17,8 @@ This is a library to facilitate tracking of anonymous and logged-in user traffic
 * [5](https://github.com/intempt/intempt-intemptjs#events-collections-and-properties) - Events, Collections & Properties
 * [6](https://github.com/intempt/intempt-intemptjs#auto-tracking-events) - Auto-tracking Events
 * [7](https://github.com/intempt/intempt-intemptjs#tracking-consents) - Recording Consents
+* [8](https://github.com/intempt/intempt-intemptjs#opting-in-out-of-tracking) - Opting in/out of Tracking
+* [9](https://github.com/intempt/intempt-intemptjs#data-subject-requests) - Opting in/out of Tracking
 
 ## Installation and Initialization
 
@@ -160,3 +162,77 @@ Example:
 ```
 
 Consents can contain as much as possible depending on your use case.
+
+## Opting in and out of tracking
+
+Every user can decide whether he/she can be tracked. To know the current tracking status of a user, you call our exported function `Intempt.has_opted_in_tracking()` to check if the user is opted into tracking and `Intempt.has_opted_out_tracking()` to check if the user opted out of tracking. 
+
+`Intempt.has_opted_in_tracking()` returns true if the user is currently opted in to tracking and false if not.
+
+`Intempt.has_opted_out_tracking()` obeys standard browser opt-out settings. By default, this will check standard browser opt out settings such as `Navigator.doNotTrack`. The method returns true if the user is currently opted out of tracking and false if not.
+
+`Intempt.opt_in_tracking()` opts the user into data tracking resumes data tracking irrespective of the customer's browser settings. In this case, Setting `DonotTrack` in your browser settings is ignored because the user has enabled tracking. Data Tracking is enabled by setting a localStorage/cookies entry.
+
+`Intempt.opt_out_tracking()` opts the user out of data tracking and pauses data tracking indefinitely until it is resumed at a later time. Data tracking is disabled by setting a localStorage/cookies entry.
+
+`Intempt.clear_opt_in_out_tracking()` reverts all Intempt's tracking settings back to the browser's settings. This means that even if the user initially opted Into tracking, calling this exported function will revert this back to the default settings of the browser meaning that if `DonotTrack` is turned on in your settings, you are automatically optedOut of tracking and if it is turned on, you are optedIn to tracking by default.
+
+## Data Subjects requests
+
+Both the General Data Protection Regulation (GDPR) and the California Consumer Privacy Act (CCPA) define that consumers/data subjects have the right to view, update, extract and delete data that controllers & businesses have saved on them. When a consumer/data subject exercises their rights, they create a data subject request (DSR).
+
+To create a data subject request, call 
+### Creating a Data Subject Request Object
+
+You need to discover supported options for creating data subject requests such as request type or the supported subject identities
+
+To discover this options, call our exported function;
+
+`Intempt.get_data_subject_request_supported_options()`
+
+The function above returns a `Promise`.
+
+The Object below is a response from our servers for supported options.
+
+```JSON
+	{
+		"api_version":"2.0",
+	    "supported_identities": {
+			"identity_type":"email,
+			 mobile_number",
+			 "identity_format":"raw"
+		},
+		"supported_subject_request_types":[
+			"portability",
+			"access",
+			"erasure"
+		],
+		"processor_certificate":
+		"https://static.intempt.com/dsr/opendsr_cert.pem"
+	}
+```
+
+After discovering supported options, we now move on to creating our DSR object.
+
+````Javascript
+	const DSRObject = {
+		regulation: "GDPR",
+        subject_request_type: "Access",
+        subject_identities: [
+			{
+				identity_type: "mobile_number",
+				identity_value: "+13022482744"
+			}
+		]
+	}
+````
+
+After creating the object, we now create the data subject request using the method below. The exported function below returns a `Promise`. 
+
+```Javascript
+	Intempt.create_data_subject_request(DSRObject)
+```
+
+After creating a data subject request, you should see it created in your organization on the [console](https://app.intempt.com/settings/requests). 
+
+
