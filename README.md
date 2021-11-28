@@ -235,4 +235,3 @@ After creating the object, we now create the data subject request using the meth
 
 After creating a data subject request, you should see it created in your organization on the [console](https://app.intempt.com/settings/requests). 
 
-
