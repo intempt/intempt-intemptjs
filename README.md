@@ -96,6 +96,33 @@ In the example above, we have a custom collection with name of `purchase`, then 
 
 `NB`: Data type sent should match data type set when creating the collection. For instance, We are sending a field `timestamp` which has a Data type of `number`, Sending data with a type of `string` instead of `number` will make this custom collection not get tracked
 
+```<script>
+        const btn = document.querySelector("#regBtn")
+        btn.addEventListener("click", () => {
+        const first_name = document.querySelector('input[name="customer[first_name]"]').value;
+        const last_name = document.querySelector('input[name="customer[last_name]"]').value;
+        const email = document.querySelector('input[name="customer[email]"]').value;
+        const discount_card_number = document.querySelector('input[name="customer[note][DiscountCardNumber]"]').value;
+        intempt.recordEvent('signed_up', {
+        first_name: first_name,
+        last_name: last_name,
+        email: email,
+        discount_card_number: discount_card_number,
+      });
+        },false)
+    </script>
+  ```
+The code snippet captures user sign-up data, such as their first name, last name, email, and discount card number. When the "regBtn" is clicked, the data is extracted from the input fields and passed as an object to Intempt's "recordEvent" function. The event name is "signed_up", and the data passed as an object includes the user's first name, last name, email, and discount card number.  
+
+Event listeners:
+Event listeners are used to detect user interaction with specific elements on the webpage, such as a button or a form input. In the code snippets, the "click" event listener is used to detect when the user clicks the "regBtn" or "loginBtn" button, respectively. When the event is detected, the function specified in the event listener is executed.
+
+The script tags are used to define client-side JavaScript code, which can be used to add interactivity and functionality to web pages. In this case, the custom Intempt methods are defined within script tags to track user behavior on the website.
+
+Query selectors are used to select specific elements on the webpage based on their HTML tag, class name, or ID. In the code snippets, query selectors are used to select the input fields containing the user's data, such as their first name, last name, and email.
+
+
+
 ## Events, Collections, and Properties
 
 An event is any interaction that occurs on your site. Events are organized by collections and proper naming. Events have properties that are key-value pairs that record relevant information about the event.
