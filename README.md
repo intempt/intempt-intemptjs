@@ -26,7 +26,7 @@
 
 # Javascript SDK
 
-Intempt's Javascript SDK makes sending your data to any tool simple without learning, testing, or implementing a new API every time.
+Intempt's Javascript SDK enables sending data tracked on the client's browser without learning, testing, or implementing a new API every time.
 
 The initialized Javascript SDK source will perform these actions:
 
